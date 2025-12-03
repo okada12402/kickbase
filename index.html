@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>キックベース得点表</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>キックベース 得点表</h1>
+    
+    <div class="scoreboard">
+        <div class="inning-info">
+            <span id="inning">1回表</span>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>イニング</th>
+                    <th>チームA</th>
+                    <th>チームB</th>
+                </tr>
+            </thead>
+            <tbody id="scoreTable">
+                <tr>
+                    <td>1回</td>
+                    <td id="scoreA1">0</td>
+                    <td id="scoreB1">0</td>
+                </tr>
+                <tr>
+                    <td>2回</td>
+                    <td id="scoreA2">0</td>
+                    <td id="scoreB2">0</td>
+                </tr>
+                <tr>
+                    <td>合計</td>
+                    <td id="totalA">0</td>
+                    <td id="totalB">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="status">
+            <p>アウト: <span id="outs">0</span></p>
+            <p>勝敗: <span id="winner">-</span></p>
+        </div>
+        <div class="controls">
+            <button id="addScoreA">チームA得点</button>
+            <button id="addScoreB">チームB得点</button>
+            <button id="addOut">アウト</button>
+            <button id="nextHalf">次の攻撃</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
