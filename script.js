@@ -1,6 +1,7 @@
 let inning = 1;
 let half = 'top'; // top=表, bottom=裏
-let batter = 1; // 打者番号
+let batter = 1;
+let maxBatters = 6; // デフォルト6人
 let scores = { A: [0,0], B: [0,0] };
 const maxInning = 2;
 
@@ -13,6 +14,14 @@ const totalB = document.getElementById('totalB');
 const batterDisplay = document.getElementById('batter');
 const inningDisplay = document.getElementById('inning');
 const winnerDisplay = document.getElementById('winner');
+const battersNumSelect = document.getElementById('battersNum');
+
+// 打者人数変更
+battersNumSelect.addEventListener('change', ()=>{
+    maxBatters = parseInt(battersNumSelect.value);
+    batter = 1; // リセット
+    updateDisplay();
+});
 
 function updateDisplay() {
     scoreA1.textContent = scores.A[0];
@@ -41,8 +50,7 @@ document.getElementById('addScore').addEventListener('click', ()=>{
 
 document.getElementById('nextBatter').addEventListener('click', ()=>{
     batter++;
-    // 例えば打者は1～9でループ
-    if (batter > 9) {
+    if (batter > maxBatters) {
         batter = 1;
         switchHalf();
     }
