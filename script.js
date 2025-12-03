@@ -1,7 +1,7 @@
 let inning = 1;
 let half = 'top'; // top=表, bottom=裏
-let outs = 0;
-let scores = { A: [0,0], B: [0,0] }; // 1回,2回
+let batter = 1; // 打者番号
+let scores = { A: [0,0], B: [0,0] };
 const maxInning = 2;
 
 const scoreA1 = document.getElementById('scoreA1');
@@ -10,7 +10,7 @@ const scoreB1 = document.getElementById('scoreB1');
 const scoreB2 = document.getElementById('scoreB2');
 const totalA = document.getElementById('totalA');
 const totalB = document.getElementById('totalB');
-const outsDisplay = document.getElementById('outs');
+const batterDisplay = document.getElementById('batter');
 const inningDisplay = document.getElementById('inning');
 const winnerDisplay = document.getElementById('winner');
 
@@ -21,7 +21,7 @@ function updateDisplay() {
     scoreB2.textContent = scores.B[1];
     totalA.textContent = scores.A.reduce((a,b)=>a+b,0);
     totalB.textContent = scores.B.reduce((a,b)=>a+b,0);
-    outsDisplay.textContent = outs;
+    batterDisplay.textContent = batter;
     inningDisplay.textContent = `${inning}回${half==='top'?'表':'裏'}`;
     
     if (inning > maxInning) {
@@ -33,39 +33,25 @@ function updateDisplay() {
     }
 }
 
-document.getElementById('addScoreA').addEventListener('click', ()=>{
+document.getElementById('addScore').addEventListener('click', ()=>{
     if (half === 'top') scores.A[inning-1]++;
-    else scores.A[inning-1]++;
-    updateDisplay();
-});
-
-document.getElementById('addScoreB').addEventListener('click', ()=>{
-    if (half === 'bottom') scores.B[inning-1]++;
     else scores.B[inning-1]++;
     updateDisplay();
 });
 
-document.getElementById('addOut').addEventListener('click', ()=>{
-    outs++;
-    if (outs >= 3) {
-        outs = 0;
+document.getElementById('nextBatter').addEventListener('click', ()=>{
+    batter++;
+    // 例えば打者は1～9でループ
+    if (batter > 9) {
+        batter = 1;
         switchHalf();
     }
     updateDisplay();
 });
 
-document.getElementById('nextHalf').addEventListener('click', ()=>{
-    outs = 0;
-    switchHalf();
-    updateDisplay();
-});
-
 function switchHalf() {
-    if (half === 'top') {
-        half = 'bottom';
-    } else {
-        half = 'top';
-        inning++;
-    }
+    half = (half==='top') ? 'bottom' : 'top';
+    if (half === 'top') inning++;
 }
+
 updateDisplay();
